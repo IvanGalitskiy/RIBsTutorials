@@ -35,9 +35,9 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
     interface RootPresenter
 
     internal inner class LoggedOutListener : LoggedOutInteractor.Listener {
-        override fun login(userName: String) {
+        override fun login(userName: String, secondUserName:String) {
             router.detachLoggedOut()
-            router.attachLoggedIn()
+            router.attachLoggedIn(userName, secondUserName)
         }
     }
 }

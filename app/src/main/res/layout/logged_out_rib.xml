@@ -10,7 +10,14 @@
             android:layout_weight="1"/>
     <EditText
             android:id="@+id/edit_text"
-            android:hint="Enter your name"
+            android:hint="Enter first name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textColor="@android:color/black"/>
+    <EditText
+            android:id="@+id/edit_text2"
+            android:hint="Enter second name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

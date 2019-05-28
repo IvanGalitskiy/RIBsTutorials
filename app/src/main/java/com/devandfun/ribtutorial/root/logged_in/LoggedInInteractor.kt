@@ -1,5 +1,6 @@
 package com.devandfun.ribtutorial.root.logged_in
 
+import android.util.Log
 import com.devandfun.ribtutorial.root.logged_in.off_game.OffGameInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.EmptyPresenter
@@ -8,6 +9,7 @@ import com.uber.rib.core.RibInteractor
 import com.uber.rib.core.Router
 
 import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * Coordinates Business Logic for [LoggedInScope].
@@ -16,6 +18,7 @@ import javax.inject.Inject
  */
 @RibInteractor
 class LoggedInInteractor : Interactor<EmptyPresenter, LoggedInRouter>() {
+
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)

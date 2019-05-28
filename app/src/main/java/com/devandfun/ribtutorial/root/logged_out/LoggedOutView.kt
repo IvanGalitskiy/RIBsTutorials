@@ -20,14 +20,16 @@ class LoggedOutView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     lateinit var button: Button
     lateinit var editText: EditText
+    lateinit var editText2: EditText
 
     override fun onFinishInflate() {
         super.onFinishInflate()
         button = findViewById(R.id.login_button)
         editText = findViewById(R.id.edit_text)
+        editText2 = findViewById(R.id.edit_text2)
     }
-    override fun loginName(): Observable<String> {
+    override fun loginName(): Observable<Pair<String, String>> {
         return button.clicks()
-            .map { editText.text.toString() }
+            .map {Pair(editText.text.toString(), editText2.text.toString() )}
     }
 }

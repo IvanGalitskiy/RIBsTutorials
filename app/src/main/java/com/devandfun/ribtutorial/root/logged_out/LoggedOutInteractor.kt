@@ -25,8 +25,8 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
         super.didBecomeActive(savedInstanceState)
         presenter.loginName()
             .subscribe {
-                if (!isEmpty(it)) {
-                    listener.login(it);
+                if (!isEmpty(it.first) && !isEmpty(it.second)) {
+                    listener.login(it.first, it.second);
                 }
             }
     }
@@ -41,9 +41,9 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
      * Presenter interface implemented by this RIB's view.
      */
     interface LoggedOutPresenter {
-        fun loginName(): Observable<String>
+        fun loginName(): Observable<Pair<String, String>>
     }
     interface Listener{
-       fun login(name:String)
+       fun login(name:String, secondName:String)
     }
 }

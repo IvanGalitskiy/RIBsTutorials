@@ -15,6 +15,7 @@ import dagger.Provides
 import dagger.BindsInstance
 
 import java.lang.annotation.RetentionPolicy.CLASS
+import javax.inject.Named
 
 class LoggedInBuilder(dependency: ParentComponent) :
     Builder<LoggedInRouter, LoggedInBuilder.ParentComponent>(dependency) {
@@ -24,9 +25,11 @@ class LoggedInBuilder(dependency: ParentComponent) :
      *
      * @return a new [LoggedInRouter].
      */
-    fun build(): LoggedInRouter {
+    fun build(firstPlayerName:String, secondPlayerName:String): LoggedInRouter {
         val interactor = LoggedInInteractor()
         val component = DaggerLoggedInBuilder_Component.builder()
+            .playerOne(firstPlayerName)
+            .playerTwo(secondPlayerName)
             .parentComponent(dependency)
             .interactor(interactor)
             .build()
@@ -79,7 +82,7 @@ class LoggedInBuilder(dependency: ParentComponent) :
             // TODO: Create provider methods for dependencies created by this Rib. These methods should be static.
         }
     }
-
+    class TestModel{}
 
     @LoggedInScope
     @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
@@ -90,6 +93,12 @@ class LoggedInBuilder(dependency: ParentComponent) :
         interface Builder {
             @BindsInstance
             fun interactor(interactor: LoggedInInteractor): Builder
+
+            @BindsInstance
+            fun playerOne(@Named("player_one") playerOne: String): Builder
+
+            @BindsInstance
+            fun playerTwo(@Named("player_two") playerTwo: String): Builder
 
             fun parentComponent(component: ParentComponent): Builder
             fun build(): Component

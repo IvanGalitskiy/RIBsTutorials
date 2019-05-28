@@ -28,8 +28,8 @@ class RootRouter(
         view.addView(loggedOutRouter?.view)
     }
 
-    fun attachLoggedIn() {
-        attachChild(loggedInBuilder.build())
+    fun attachLoggedIn(firstName:String ,secondName:String) {
+        attachChild(loggedInBuilder.build(firstName, secondName))
     }
 
     fun detachLoggedOut() {

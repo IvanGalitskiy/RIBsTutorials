@@ -18,7 +18,8 @@
                 android:text="@string/player_one_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"/>
+                android:layout_weight="3"
+                android:textColor="@android:color/black"/>
 
         <TextView
                 android:id="@+id/player_one_win_count"
@@ -41,7 +42,8 @@
                 android:text="@string/player_two_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"/>
+                android:layout_weight="3"
+                android:textColor="@android:color/black"/>
 
         <TextView
                 android:id="@+id/player_two_win_count"
