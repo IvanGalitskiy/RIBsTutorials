@@ -57,6 +57,7 @@ class TicTacInteractor : Interactor<TicTacInteractor.TicTacPresenter, TicTacRout
     interface TicTacPresenter {
         fun playerOneWinReport(): Observable<Unit>
         fun playerTwoWinReport(): Observable<Unit>
+        fun setNames(playerOne:String, playerTwo:String)
     }
 
     interface Listener{

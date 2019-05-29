@@ -17,6 +17,7 @@ class TicTacView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     TicTacInteractor.TicTacPresenter{
 
 
+
     lateinit var vPlayerOne:TextView
     lateinit var vPlayerTwo:TextView
 
@@ -29,4 +30,9 @@ class TicTacView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun playerOneWinReport(): Observable<Unit> = vPlayerOne.clicks()
 
     override fun playerTwoWinReport(): Observable<Unit> = vPlayerTwo.clicks()
+
+    override fun setNames(playerOne: String, playerTwo: String) {
+        vPlayerOne.text = playerOne
+        vPlayerTwo.text = playerTwo
+    }
 }
