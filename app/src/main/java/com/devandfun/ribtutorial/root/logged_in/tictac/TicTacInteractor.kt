@@ -45,6 +45,7 @@ class TicTacInteractor : Interactor<TicTacInteractor.TicTacPresenter, TicTacRout
             .subscribe {
                 listener.onGameFinished(playerTwo)
             }
+        presenter.setNames(playerOne, playerTwo)
     }
 
     override fun willResignActive() {
