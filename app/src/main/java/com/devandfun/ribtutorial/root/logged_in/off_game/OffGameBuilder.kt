@@ -3,6 +3,7 @@ package com.devandfun.ribtutorial.root.logged_in.off_game
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.devandfun.ribtutorial.R
+import com.devandfun.ribtutorial.root.logged_in.ScoreStream
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -48,6 +49,8 @@ class OffGameBuilder(dependency: ParentComponent) :
         fun playerOne(): String
         @Named("player_two")
         fun playerTwo(): String
+        fun scoreStream():ScoreStream
+        fun listener():OffGameInteractor.Listener
     }
 
     @dagger.Module

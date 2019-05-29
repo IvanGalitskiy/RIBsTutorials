@@ -1,5 +1,7 @@
 package com.devandfun.ribtutorial.root.logged_in
 
+import com.devandfun.ribtutorial.root.RootBuilder
+import com.devandfun.ribtutorial.root.RootInteractor
 import com.devandfun.ribtutorial.root.RootView
 import com.devandfun.ribtutorial.root.logged_in.off_game.OffGameBuilder
 import com.devandfun.ribtutorial.root.logged_in.tictac.TicTacBuilder
@@ -16,6 +18,12 @@ import dagger.BindsInstance
 
 import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Named
+import com.devandfun.ribtutorial.root.logged_in.LoggedInBuilder.LoggedInInternal
+import com.devandfun.ribtutorial.root.logged_in.off_game.OffGameInteractor
+import com.devandfun.ribtutorial.root.logged_in.tictac.TicTacInteractor
+import com.devandfun.ribtutorial.root.logged_out.LoggedOutInteractor
+import dagger.Binds
+
 
 class LoggedInBuilder(dependency: ParentComponent) :
     Builder<LoggedInRouter, LoggedInBuilder.ParentComponent>(dependency) {
@@ -25,7 +33,7 @@ class LoggedInBuilder(dependency: ParentComponent) :
      *
      * @return a new [LoggedInRouter].
      */
-    fun build(firstPlayerName:String, secondPlayerName:String): LoggedInRouter {
+    fun build(firstPlayerName: String, secondPlayerName: String): LoggedInRouter {
         val interactor = LoggedInInteractor()
         val component = DaggerLoggedInBuilder_Component.builder()
             .playerOne(firstPlayerName)
@@ -72,17 +80,43 @@ class LoggedInBuilder(dependency: ParentComponent) :
                 )
             }
 
-
             @LoggedInScope
             @Provides
             @JvmStatic
             internal fun offGameListener(interactor: LoggedInInteractor): LoggedInInteractor.OffGameListener {
                 return interactor.OffGameListener()
             }
-            // TODO: Create provider methods for dependencies created by this Rib. These methods should be static.
+
+            @LoggedInScope
+            @LoggedInInternal
+            @Provides
+            @JvmStatic
+            internal fun mutableScoreStream(
+                @Named("player_one") playerOne: String,
+                @Named("player_two") playerTwo: String
+            ): MutableScoreStream {
+                return MutableScoreStream(playerOne, playerTwo)
+            }
+
+            @LoggedInScope
+            @Provides
+            @JvmStatic
+            fun loggedOutListener(loggedInInteractor: LoggedInInteractor) : OffGameInteractor.Listener {
+                return loggedInInteractor.OffGameListener()
+            }
+            @LoggedInScope
+            @Provides
+            @JvmStatic
+            fun tictacListener(loggedInInteractor: LoggedInInteractor) : TicTacInteractor.Listener {
+                return loggedInInteractor.TicTacGameListener()
+            }
         }
+
+        @Binds
+        internal abstract fun scoreStream(@LoggedInInternal mutableScoreStream: MutableScoreStream): ScoreStream
+
     }
-    class TestModel{}
+
 
     @LoggedInScope
     @dagger.Component(modules = arrayOf(Module::class), dependencies = arrayOf(ParentComponent::class))
