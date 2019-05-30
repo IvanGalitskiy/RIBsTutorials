@@ -34,6 +34,7 @@ dependencies {
 
     kapt 'com.uber.rib:rib-compiler-test:0.9.1'
     implementation 'com.uber.rib:rib-android:0.9.1'
+    implementation group: 'com.uber.rib', name: 'rib-workflow', version: '0.9.1'
     testImplementation 'com.uber.rib:rib-test-utils:0.9.1'
 
     kapt 'com.google.dagger:dagger-compiler:2.21'

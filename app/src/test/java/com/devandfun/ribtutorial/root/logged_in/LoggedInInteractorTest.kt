@@ -20,7 +20,7 @@ class LoggedInInteractorTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    interactor = TestLoggedInInteractor.create()
+    interactor = TestLoggedInInteractor.create(MutableScoreStream("fakename1", "fakename2"))
   }
 
   /**

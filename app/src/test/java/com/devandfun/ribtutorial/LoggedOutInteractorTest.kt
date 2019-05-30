@@ -35,14 +35,14 @@ class LoggedOutInteractorTest : RibTestBasePlaceholder() {
 
     @Test
     fun attach_whenViewEmitsName_shouldCallListener() {
-        Mockito.`when`(presenter.loginName()).thenReturn(Observable.just("fakename"))
+        Mockito.`when`(presenter.loginName()).thenReturn(Observable.just(Pair<String, String>("fakename", "fakename2")))
         InteractorHelper.attach(interactor, presenter, router, null)
-        verify(listener).login(Matchers.anyString())
+        verify(listener).login(Matchers.anyString(), Matchers.anyString())
     }
     @Test
     fun attach_whenViewEmitsEmptyName_shouldNotCallListener() {
-        Mockito.`when`(presenter.loginName()).thenReturn(Observable.just(""))
+        Mockito.`when`(presenter.loginName()).thenReturn(Observable.just(Pair<String, String>("", "fakename2")))
         InteractorHelper.attach(interactor, presenter, router, null)
-        verify(listener, never()).login(Matchers.anyString())
+        verify(listener, never()).login(Matchers.anyString(),Matchers.anyString())
     }
 }

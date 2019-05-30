@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations
 class TicTacInteractorTest : RibTestBasePlaceholder() {
 
   @Mock internal lateinit var presenter: TicTacInteractor.TicTacPresenter
+  @Mock internal lateinit var listener: TicTacInteractor.Listener
   @Mock internal lateinit var router: TicTacRouter
 
   private var interactor: TicTacInteractor? = null
@@ -19,7 +20,7 @@ class TicTacInteractorTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    interactor = TestTicTacInteractor.create(presenter)
+    interactor = TestTicTacInteractor.create(presenter,listener, "fakename1", "fakename2")
   }
 
   /**

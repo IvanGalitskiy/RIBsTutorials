@@ -1,5 +1,6 @@
 package com.devandfun.ribtutorial.root.logged_in.off_game
 
+import com.devandfun.ribtutorial.root.logged_in.MutableScoreStream
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.InteractorHelper
 
@@ -11,6 +12,7 @@ import org.mockito.MockitoAnnotations
 class OffGameInteractorTest : RibTestBasePlaceholder() {
 
   @Mock internal lateinit var presenter: OffGameInteractor.OffGamePresenter
+  @Mock internal lateinit var listener: OffGameInteractor.Listener
   @Mock internal lateinit var router: OffGameRouter
 
   private var interactor: OffGameInteractor? = null
@@ -19,7 +21,8 @@ class OffGameInteractorTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    interactor = TestOffGameInteractor.create(presenter)
+    interactor = TestOffGameInteractor.create("fakename1", "fakename2", presenter, MutableScoreStream("fakename1", "fakename2"),
+      listener)
   }
 
   /**

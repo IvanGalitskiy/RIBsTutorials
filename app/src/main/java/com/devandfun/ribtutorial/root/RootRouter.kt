@@ -1,11 +1,16 @@
 package com.devandfun.ribtutorial.root
 
 import android.view.View
+import com.devandfun.ribtutorial.root.logged_in.LoggedInActionableItem
 import com.devandfun.ribtutorial.root.logged_in.LoggedInBuilder
 import com.devandfun.ribtutorial.root.logged_out.LoggedOutBuilder
 import com.devandfun.ribtutorial.root.logged_out.LoggedOutRouter
+import com.jakewharton.rxrelay2.BehaviorRelay
+import com.uber.rib.core.Optional
 
 import com.uber.rib.core.ViewRouter
+
+
 
 /**
  * Adds and removes children of {@link RootBuilder.RootScope}.
@@ -18,9 +23,10 @@ class RootRouter(
     component: RootBuilder.Component,
     val loggedOutBuilder: LoggedOutBuilder,
     val loggedInBuilder: LoggedInBuilder
-) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component) {
+) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component)  {
 
     var loggedOutRouter: LoggedOutRouter? = null
+    private val loggedInActionableItemRelay = BehaviorRelay.create<Optional<LoggedInActionableItem>>()
 
     fun attachLoggedOut() {
         loggedOutRouter = loggedOutBuilder.build(view)
@@ -28,8 +34,11 @@ class RootRouter(
         view.addView(loggedOutRouter?.view)
     }
 
-    fun attachLoggedIn(firstName:String ,secondName:String) {
+    fun attachLoggedIn(firstName:String ,secondName:String):LoggedInActionableItem {
+        val loggedInRouter = loggedInBuilder.build(firstName, secondName)
         attachChild(loggedInBuilder.build(firstName, secondName))
+        loggedInActionableItemRelay.accept(Optional.of(loggedInRouter.interactor))
+        return loggedInRouter.interactor
     }
 
     fun detachLoggedOut() {

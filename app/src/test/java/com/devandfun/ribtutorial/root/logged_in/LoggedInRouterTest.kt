@@ -1,5 +1,8 @@
 package com.devandfun.ribtutorial.root.logged_in
 
+import com.devandfun.ribtutorial.root.RootView
+import com.devandfun.ribtutorial.root.logged_in.off_game.OffGameBuilder
+import com.devandfun.ribtutorial.root.logged_in.tictac.TicTacBuilder
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
 
@@ -12,6 +15,7 @@ class LoggedInRouterTest : RibTestBasePlaceholder() {
 
   @Mock internal lateinit var component: LoggedInBuilder.Component
   @Mock internal lateinit var interactor: LoggedInInteractor
+  @Mock internal lateinit var rootView: RootView
 
   private var router: LoggedInRouter? = null
 
@@ -19,7 +23,7 @@ class LoggedInRouterTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = LoggedInRouter(interactor, component)
+    router = LoggedInRouter(interactor, component, rootView,OffGameBuilder(component), TicTacBuilder(component))
   }
 
   /**

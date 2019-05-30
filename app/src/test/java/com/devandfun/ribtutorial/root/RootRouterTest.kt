@@ -1,5 +1,6 @@
 package com.devandfun.ribtutorial.root
 
+import com.devandfun.ribtutorial.root.logged_in.LoggedInBuilder
 import com.devandfun.ribtutorial.root.logged_out.LoggedOutBuilder
 import com.uber.rib.core.RibTestBasePlaceholder
 import com.uber.rib.core.RouterHelper
@@ -21,7 +22,7 @@ class RootRouterTest : RibTestBasePlaceholder() {
   fun setup() {
     MockitoAnnotations.initMocks(this)
 
-    router = RootRouter(view, interactor, component, LoggedOutBuilder(component))
+    router = RootRouter(view, interactor, component, LoggedOutBuilder(component), LoggedInBuilder(component))
   }
 
   /**

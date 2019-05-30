@@ -19,7 +19,7 @@ import javax.inject.Named
  * TODO describe the logic of this scope.
  */
 @RibInteractor
-class LoggedInInteractor : Interactor<EmptyPresenter, LoggedInRouter>() {
+class LoggedInInteractor : Interactor<EmptyPresenter, LoggedInRouter>(), LoggedInActionableItem {
 
     @Inject
     @LoggedInBuilder.LoggedInInternal
